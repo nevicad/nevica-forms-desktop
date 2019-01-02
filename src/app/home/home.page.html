@@ -19,18 +19,18 @@
 
   <!-- Searchbar in a Toolbar -->
   <ion-toolbar *ngIf="search" color="light">
-    <ion-searchbar animated placeholder="Buscar" mode="ios"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="filterForms()" animated placeholder="Buscar" mode="ios"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col *ngFor="let card of cards" size="12" size-sm="3">
+      <ion-col *ngFor="let form of filteredForms" size="12" size-sm="3">
         <ion-card mode="ios">
           <ion-card-header>
-            <ion-card-subtitle>{{card.subtitle}}</ion-card-subtitle>
-            <ion-card-title>{{card.title}}</ion-card-title>        
+            <ion-card-subtitle>{{form.subtitle}}</ion-card-subtitle>
+            <ion-card-title>{{form.title}}</ion-card-title>        
           </ion-card-header>
           <ion-card-content>
             <ion-button fill="clear" color="primary">
@@ -47,4 +47,10 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-fab class="fab" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

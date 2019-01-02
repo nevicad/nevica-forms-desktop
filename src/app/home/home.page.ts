@@ -6,12 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  cards: Array<{title: string, subtitle: string}> = [];
+  forms: Array<{title: string, subtitle: string}> = [];
+  filteredForms: Array<{title: string, subtitle: string}>;
   search: boolean = false;
+  searchTerm: string;
   constructor(){
     for (let i = 0; i < 10; i++){
-      this.cards.push({title: `Card ${i}`, subtitle: `Subtitle ${i^2}`})
+      this.forms.push({title: `Card ${i}`, subtitle: `Subtitle ${i^2}`})
     }
+    console.log(this.forms);
+    this.filterForms('');
   }
 
   showSearch(){
@@ -21,4 +25,11 @@ export class HomePage {
       this.search = false
     }
   }
+
+  filterForms(filter: string = this.searchTerm){
+    this.filteredForms = this.forms.filter((item)=>{
+      return item.title.toLowerCase().includes(filter.toLowerCase())
+    })
+  }
+
 }
