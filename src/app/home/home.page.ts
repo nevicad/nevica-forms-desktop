@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ export class HomePage {
   filteredForms: Array<{title: string, subtitle: string}>;
   search: boolean = false;
   searchTerm: string;
-  constructor(){
+  constructor(private router: Router){
     for (let i = 0; i < 10; i++){
       this.forms.push({title: `Card ${i}`, subtitle: `Subtitle ${i^2}`})
     }
@@ -32,4 +33,11 @@ export class HomePage {
     })
   }
 
+  pushPage(page: string, data: any){
+    this.router.navigate([page,data])
+  }
+
+  newForm(){
+    this.pushPage('/form',{})
+  }
 }
